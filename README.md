@@ -2,6 +2,14 @@
 
 A React + Vite + TypeScript frontend and an Express backend that lets users submit products through a multi-step form, generates tailored (rule-based) AI questions per product type, stores submissions in memory, and exports a polished PDF report.
 
+## 🌐 Live Demo
+
+**Deployed Application:** [Coming Soon - Deploy via Vercel Dashboard]
+
+**GitHub Repository:** https://github.com/HarshaTalatala/product-submission-system
+
+> **Note:** After deploying via Vercel, update this section with your live URL!
+
 ## Setup
 
 Prerequisites
@@ -176,17 +184,43 @@ Invoke-RestMethod -Method POST http://localhost:5000/api/products -Body $body -C
 - Backend: Node.js, Express, CORS
 - Tooling: ESLint, Concurrently, Vercel routing
 
-## Deploy (Vercel)
+## 🚀 Deploy (Vercel GitHub Integration)
 
-This repo includes a `vercel.json` that:
-- Routes `/api/*` to `backend/server.js` (serverless)
-- Serves the built frontend from `frontend/dist`
+This project is configured for seamless deployment with Vercel's GitHub integration.
 
-Typical flow:
-- Build the frontend locally or with Vercel’s build step (`npm --prefix frontend run build`), then push to your repo
-- Connect the repo to Vercel and deploy
+### Quick Deploy Steps:
 
-If you override build settings, ensure `frontend` is built and that `backend/server.js` is detected as a serverless function according to `vercel.json`.
+1. **Push to GitHub** (Already done! ✅)
+   ```powershell
+   git add .
+   git commit -m "Ready for deployment"
+   git push origin main
+   ```
+
+2. **Import to Vercel**
+   - Go to [vercel.com](https://vercel.com)
+   - Sign in with GitHub
+   - Click "Add New..." → "Project"
+   - Import `HarshaTalatala/product-submission-system`
+
+3. **Configure (Auto-detected)**
+   - Build Command: `cd frontend && npm install && npm run build`
+   - Output Directory: `frontend/dist`
+   - Install Command: `npm install`
+
+4. **Deploy!**
+   - Click "Deploy" and wait 2-3 minutes
+   - Get your live URL: `https://product-submission-system-xyz.vercel.app`
+
+### Automatic Deployments
+Every push to `main` triggers automatic redeployment! 🎉
+
+### Configuration Files
+- `vercel.json` - Routes API calls to serverless functions and serves static frontend
+- `.vercelignore` - Excludes unnecessary files from deployment
+- `package.json` - Contains `vercel-build` script for deployment
+
+**📖 Detailed deployment guide:** See [DEPLOYMENT.md](./DEPLOYMENT.md)
 
 ## Reflection (~200 words)
 
