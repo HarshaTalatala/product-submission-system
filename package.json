@@ -7,8 +7,9 @@
     "dev:backend": "cd backend && npm run dev",
     "dev:frontend": "cd frontend && npm run dev",
     "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
-    "build": "cd frontend && npm run build",
-    "start": "cd backend && npm start"
+    "build": "npm install && cd backend && npm install && cd ../frontend && npm install && npm run build",
+    "start": "cd backend && npm start",
+    "vercel-build": "cd frontend && npm install && npm run build"
   },
   "keywords": ["react", "express", "typescript", "ai", "pdf"],
   "author": "",
