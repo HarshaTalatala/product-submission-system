@@ -184,43 +184,85 @@ Invoke-RestMethod -Method POST http://localhost:5000/api/products -Body $body -C
 - Backend: Node.js, Express, CORS
 - Tooling: ESLint, Concurrently, Vercel routing
 
-## 🚀 Deploy (Vercel GitHub Integration)
+## 🚀 Deployment
 
-This project is configured for seamless deployment with Vercel's GitHub integration.
+This project uses **separate deployments** for frontend and backend on Vercel.
 
-### Quick Deploy Steps:
+### Deployment Architecture
 
-1. **Push to GitHub** (Already done! ✅)
-   ```powershell
-   git add .
-   git commit -m "Ready for deployment"
-   git push origin main
-   ```
+```
+┌─────────────────────────────────────────────────┐
+│           Two Separate Vercel Projects          │
+├─────────────────────┬───────────────────────────┤
+│   Frontend Deploy   │    Backend Deploy         │
+│   (Static Site)     │    (Serverless API)       │
+│                     │                           │
+│  - Vite Build       │  - Express Server         │
+│  - React App        │  - API Routes             │
+│  - dist/ folder     │  - Serverless Functions   │
+└─────────────────────┴───────────────────────────┘
+           │                      │
+           └──── Connected via ───┘
+                 Environment Variable
+                 (VITE_API_URL)
+```
 
-2. **Import to Vercel**
-   - Go to [vercel.com](https://vercel.com)
-   - Sign in with GitHub
-   - Click "Add New..." → "Project"
-   - Import `HarshaTalatala/product-submission-system`
+### Quick Deploy
 
-3. **Configure (Auto-detected)**
-   - Build Command: `cd frontend && npm install && npm run build`
-   - Output Directory: `frontend/dist`
-   - Install Command: `npm install`
+#### Option 1: Manual Deployment (CLI)
 
-4. **Deploy!**
-   - Click "Deploy" and wait 2-3 minutes
-   - Get your live URL: `https://product-submission-system-xyz.vercel.app`
+**Step 1: Deploy Backend**
+```powershell
+cd backend
+vercel --prod
+# Note the deployed URL: https://your-backend.vercel.app
+```
 
-### Automatic Deployments
-Every push to `main` triggers automatic redeployment! 🎉
+**Step 2: Deploy Frontend**
+```powershell
+cd frontend
+vercel --prod
+# Then add environment variable in Vercel dashboard:
+# VITE_API_URL = https://your-backend.vercel.app/api
+```
+
+#### Option 2: GitHub Integration (Recommended)
+
+1. **Connect GitHub Repository**
+   - Go to [vercel.com/dashboard](https://vercel.com/dashboard)
+   - Click "Add New Project"
+   - Import: `HarshaTalatala/product-submission-system`
+
+2. **Create Backend Project**
+   - Project Name: `product-submission-backend`
+   - Root Directory: `backend`
+   - Framework: Other
+   - Click Deploy
+
+3. **Create Frontend Project**
+   - Click "Add New Project" again
+   - Import same repository
+   - Project Name: `product-submission-frontend`
+   - Root Directory: `frontend`
+   - Framework: Vite
+   - Add Environment Variable:
+     - Key: `VITE_API_URL`
+     - Value: `https://your-backend-url.vercel.app/api`
+   - Click Deploy
+
+### 📖 Complete Deployment Guide
+
+For detailed step-by-step instructions, see:
+- **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)** - Master guide with all steps
+- **[backend/DEPLOYMENT.md](./backend/DEPLOYMENT.md)** - Backend-specific guide
+- **[frontend/DEPLOYMENT.md](./frontend/DEPLOYMENT.md)** - Frontend-specific guide
 
 ### Configuration Files
-- `vercel.json` - Routes API calls to serverless functions and serves static frontend
-- `.vercelignore` - Excludes unnecessary files from deployment
-- `package.json` - Contains `vercel-build` script for deployment
 
-**📖 Detailed deployment guide:** See [DEPLOYMENT.md](./DEPLOYMENT.md)
+- `backend/vercel.json` - Backend serverless function configuration
+- `frontend/vercel.json` - Frontend static site configuration
+- `frontend/.env.local` - Local development environment variables
+- `.vercelignore` - Files excluded from deployment
 
 ## Reflection (~200 words)
 
