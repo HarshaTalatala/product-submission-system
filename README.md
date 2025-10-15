@@ -1,4 +1,4 @@
-# Product Transparency System 🌟
+# Product Transparency System
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
 [![React](https://img.shields.io/badge/React-18.2.0-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
@@ -27,7 +27,7 @@
 
 ---
 
-## 🎯 Overview
+## Overview
 
 The Product Transparency System is designed to help companies provide comprehensive, transparent information about their products. By leveraging intelligent question generation and structured data collection, this platform builds trust with consumers who want to make informed, ethical purchasing decisions.
 
